@@ -1,13 +1,13 @@
 var number = Math.floor(Math.random() * 8888) + 1111;
 document.getElementById('connection_code').innerHTML = number;
 function perform_vibration() {
-    if (servercall == 1) {
+    // if (servercall == 1) {
         window.navigator.vibrate(1000);
-    } else if (servercall == 0) {
-        window.navigator.vibrate([1000, 1000, 1000]);
-    } else {
-        document.write('value is null');
-    }
+    // } else if (servercall == 0) {
+    //     window.navigator.vibrate([1000, 1000, 1000]);
+    // } else {
+    //     document.write('value is null');
+    // }
 }
 
 var ID = function() {
@@ -39,6 +39,7 @@ var ID = function() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
     client.subscribe(`spot-me/${number}/connected`);
+    client.subscribe(`spot-me/${number}/detected`);
     let message = new Paho.Message("Hello");
     message.destinationName = `spot-me/${number}/detected`;
     client.send(message);
