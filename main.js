@@ -21,11 +21,10 @@ var ID = function() {
         .substr(2, 9)
     );
   };
-  var client = new Paho.Client(
-    "api.akriya.co.in",
-    8084,
-    `clientId-spot-mobile-${ID}`
+  var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
+    `clientId-spot-mobile-${ID}`    
   );
+  
   
   // set callback handlers
   client.onConnectionLost = onConnectionLost;
