@@ -1,5 +1,5 @@
 var number = Math.floor(Math.random() * 8888) + 1111;
-document.getElementById('connection_code').innerHTML = number + "please input this number in your spot me devise";
+document.getElementById('connection_code').innerHTML = number + " please input this number in your Spot-Me device";
 function perform_vibration() {
     if (servercall == 1) {
         window.navigator.vibrate(1000);
@@ -9,3 +9,51 @@ function perform_vibration() {
         document.write('value is null');
     }
 }
+
+var ID = function() {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return (
+      "_" +
+      Math.random()
+        .toString(36)
+        .substr(2, 9)
+    );
+  };
+  var client = new Paho.Client(
+    "api.akriya.co.in",
+    8083,
+    `clientId-spot-mobile-${ID}`
+  );
+  
+  // set callback handlers
+  client.onConnectionLost = onConnectionLost;
+  client.onMessageArrived = onMessageArrived;
+  
+  // connect the client
+  client.connect({ onSuccess: onConnect });
+  
+  // called when the client connects
+  function onConnect() {
+    // Once a connection has been made, make a subscription and send a message.
+    console.log("onConnect");
+    client.subscribe("spot-me/mobile");
+    let message = new Paho.Message("Hello");
+    message.destinationName = `spot-me/${number}/present`;
+    client.send(message);
+  }
+  
+  // called when the client loses its connection
+  function onConnectionLost(responseObject) {
+    if (responseObject.errorCode !== 0) {
+      console.log("onConnectionLost:" + responseObject.errorMessage);
+    }
+  }
+  
+  // called when a message arrives
+  function onMessageArrived(message) {
+    console.log("onMessageArrived:" + message.payloadString);
+  }
+  
+  
