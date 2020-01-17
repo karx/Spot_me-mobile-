@@ -1,5 +1,5 @@
 var number = Math.floor(Math.random() * 8888) + 1111;
-document.getElementById('connection_code').innerHTML = number + " please input this number in your Spot-Me device";
+document.getElementById('connection_code').innerHTML = number;
 function perform_vibration() {
     if (servercall == 1) {
         window.navigator.vibrate(1000);
