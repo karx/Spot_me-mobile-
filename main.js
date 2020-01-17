@@ -38,9 +38,9 @@ var ID = function() {
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
-    client.subscribe("spot-me/mobile");
+    client.subscribe(`spot-me/${number}/connected`);
     let message = new Paho.Message("Hello");
-    message.destinationName = `spot-me/${number}/present`;
+    message.destinationName = `spot-me/${number}/detected`;
     client.send(message);
   }
   
@@ -53,6 +53,7 @@ var ID = function() {
   
   // called when a message arrives
   function onMessageArrived(message) {
+      perform_vibration();
     console.log("onMessageArrived:" + message.payloadString);
   }
   
