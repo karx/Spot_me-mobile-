@@ -1,17 +1,24 @@
 var number = Math.floor(Math.random() * 8888) + 1111;
 
-
+function beginTheThing() {
+    init();
+}
 function init() {
     document.getElementById('connection_code').innerHTML = number;
     document.getElementById('connection_code').setAttribute('aria-label', `Connection Code is ${number}`);
+    let btn = document.getElementById('init-btn');
+    // var pointer = document.getElementById('the-pointer-to-show');
+    btn.style.display = "none";
 };
 
-init();
+// init();
 function perform_vibration(type = 1) {
     if (type == 0) {
-        window.navigator.vibrate(1000);
+        window.navigator.vibrate(300);
     } else if (type == 1) {
-        window.navigator.vibrate([300, 100, 300,100,300]);
+        window.navigator.vibrate([20, 30, 20,30,20]);
+    } else if (type == 2) {
+        window.navigator.vibrate([20]);
     }
     // } else {
     //     document.write('value is null');
