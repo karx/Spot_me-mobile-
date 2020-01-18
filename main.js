@@ -37,7 +37,7 @@ var ID = function () {
     );
 };
 var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
-    `clientId-spot-mobile-${ID}`
+    `clientId-spot-mobile-${ID()}`
 );
 
 
