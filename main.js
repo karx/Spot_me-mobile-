@@ -8,10 +8,10 @@ function init() {
 
 init();
 function perform_vibration(type = 1) {
-    if (type == 1) {
+    if (type == 0) {
         window.navigator.vibrate(1000);
-    } else if (type == 0) {
-        window.navigator.vibrate([1000, 1000, 1000]);
+    } else if (type == 1) {
+        window.navigator.vibrate([300, 100, 300,100,300]);
     }
     // } else {
     //     document.write('value is null');
