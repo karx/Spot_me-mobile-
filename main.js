@@ -2,10 +2,10 @@ var number = Math.floor(Math.random() * 8888) + 1111;
 
 
 function init() {
-document.getElementById('connection_code').innerHTML(number);
-document.getElementById('connection_code').setAttribute('aria-label',`Connection Code is ${number}`);
+    document.getElementById('connection_code').innerHTML = number;
+    document.getElementById('connection_code').setAttribute('aria-label', `Connection Code is ${number}`);
 };
-        
+
 init();
 function perform_vibration(type = 1) {
     if (type == 1) {
