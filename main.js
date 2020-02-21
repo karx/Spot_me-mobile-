@@ -36,9 +36,15 @@ var ID = function () {
             .substr(2, 9)
     );
 };
-var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
-    `clientId-spot-mobile-${ID()}`
-);
+// var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
+//     `clientId-adEngine-mobile-${ID()}`
+// );
+
+var client = new Paho.Client(
+    "api.akriya.co.in",
+    8083,
+    `clientId-91springboard_${ID}`
+  );
 
 
 // set callback handlers
@@ -52,11 +58,12 @@ client.connect({ onSuccess: onConnect });
 function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
-    client.subscribe(`spot-me/${number}/connected`);
-    client.subscribe(`spot-me/${number}/detected`);
+    client.subscribe(`adEngine/${number}/connected`);
+    client.subscribe(`adEngine/${number}/detected`);
     let message = new Paho.Message("Hello");
-    message.destinationName = `spot-me/${number}/detected`;
+    message.destinationName = `adEngine/${number}/detected`;
     client.send(message);
+    
 }
 
 // called when the client loses its connection
@@ -68,11 +75,24 @@ function onConnectionLost(responseObject) {
 
 // called when a message arrives
 function onMessageArrived(message) {
-    if (message.topic === `spot-me/${number}/detected`) {
+    if (message.topic === `adEngine/${number}/detected`) {
         perform_vibration(0);
-    } else {
-        perform_vibration();
+    } else if (message.topic === `adEngine/${number}/connected`){
+        show_options();
     }
+    console.log(message);
     console.log("onMessageArrived:" + message.payloadString);
 }
 
+function show_options() {
+    document.getElementById('options-div').style.display = 'block';
+}
+
+function sendAdInterupt() {
+    let message = new Paho.Message('play-ad');
+    message.destinationName = `adEngine/${number}/controls`;
+    client.send(message);
+}
+document.getElementById('showAd').onclick = () => {
+    sendAdInterupt();
+}
