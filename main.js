@@ -36,15 +36,15 @@ var ID = function () {
             .substr(2, 9)
     );
 };
-// var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
-//     `clientId-adEngine-mobile-${ID()}`
-// );
+var client = new Paho.Client("wss://api.akriya.co.in:8084/mqtt",
+    `clientId-adEngine-mobile-${ID()}`
+);
 
-var client = new Paho.Client(
-    "api.akriya.co.in",
-    8083,
-    `clientId-91springboard_${ID}`
-  );
+// var client = new Paho.Client(
+//     "api.akriya.co.in",
+//     8083,
+//     `clientId-91springboard_${ID}`
+//   );
 
 
 // set callback handlers
