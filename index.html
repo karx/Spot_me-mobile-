@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title> Spot-me Mobile</title>
+    <title> AdEngine Control Mobile</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.js"></script>
     <style>
         body {
@@ -35,10 +35,10 @@
     </div>
     <div id="options-div" class="options-overlay">
         <div class="profiles">
-            <li>Home Buyer</li>
-            <li>Electorinics </li>
-            <li>Insurance </li>
-            <li>Food </li>
+            <li onclick="sendPref('home')">Home Buyer</li>
+            <!-- <li>Electorinics </li> -->
+            <li onclick="sendPref('insurace')">Insurance </li>
+            <li onclick="sendPref('food')">Food </li>
         </div>
 
 

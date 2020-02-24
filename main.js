@@ -96,3 +96,10 @@ function sendAdInterupt() {
 document.getElementById('showAd').onclick = () => {
     sendAdInterupt();
 }
+
+function sendPref(str) {
+    console.log(str);
+    let message = new Paho.Message(str);
+    message.destinationName = `adEngine/${number}/profile`;
+    client.send(message);
+}
