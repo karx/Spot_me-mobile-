@@ -93,8 +93,18 @@ function sendAdInterupt() {
     message.destinationName = `adEngine/${number}/controls`;
     client.send(message);
 }
+function sendStartFromTheTop() {
+    let message = new Paho.Message('start-start');
+    message.destinationName = `adEngine/all/controls`;
+    client.send(message);
+}
+
 document.getElementById('showAd').onclick = () => {
     sendAdInterupt();
+}
+
+document.getElementById('start-all').onclick = () => {
+    sendStartFromTheTop();
 }
 
 function sendPref(str) {
